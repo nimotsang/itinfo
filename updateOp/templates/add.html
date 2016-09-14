@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block nav-head %}
+	{{ block.super }}
+{% endblock %}
+{% block nav-top %}
+       {{ block.super }}
+{% endblock %}
+{% block nav-side %}
+	{{ block.super }}
+{% endblock %}
+{% block content %}
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    &nbsp;
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            		添加操作记录
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <form role="form" action="" method="post">
+                                        <div class="form-group">
+                                            <label>版本号</label>
+                                            <input class="form-control" placeholder="RELEASE号码" name="name" value="{{ name }}">
+                                        </div>  
+                                         <div class="form-group">
+                                            <label>选择更新的产品 </label>
+                                            <select multiple class="form-control" name="prod">
+                                                {% for product in products %}
+                                                {% ifequal product.id prod %}
+                                                <option value="{{ product.id }}" selected="selected">{{ product }}</option>
+                                                {%  else %}
+                                                <option value="{{ product.id }}">{{ product }}</option>
+                                                {% endifequal %}
+                                                {% endfor %}
+                                            </select>
+                                        </div>                                                           
+                                        <div class="form-group">
+                                            <label>更新内容</label>
+                                            <textarea class="form-control" rows="3" name="content" data-value="content"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>上线类型</label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="issue_type" id="optionsRadiosInline1" value="1" {% ifequal issue_type 1 %} checked {% endifequal %}>正常上线
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="issue_type" id="optionsRadiosInline2" value="0" {% ifequal issue_type 0 %} checked {% endifequal %}>紧急上线
+                                            </label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>需求人</label>
+                                            <input class="form-control" placeholder="Enter text" name="req_from" value="{{ req_from }}">
+                                        </div>  
+                                         <div class="form-group">
+                                            <label>报告人</label>
+                                            <input class="form-control" placeholder="Enter text" name="report_to" value="{{ report_to }}">
+                                        </div>  
+                                         <div class="form-group">
+                                            <label>操作人 </label>
+                                            <select multiple class="form-control" name="operator">
+                                                {% for op in operators %}
+                                                    {% ifequal op.id operator %}
+                                                <option selected="selected">{{ op }}</option>
+                                                    {% else %}
+                                                <option>{{ op }}</option>
+                                                    {% endifequal %}
+                                                {% endfor %}
+                                            </select>
+                                        </div> 
+                                        <div class="form-group">
+                                            <label>操作日期</label>
+                                            <input class="form-control" placeholder="输入操作日期" name="op_time">
+                                        </div>                                            
+                                        <button type="submit" class="btn btn-default" name="ok">提交</button>
+                                        <button type="reset" class="btn btn-default">重置</button>
+                                    </form>
+                                </div>                               
+                                <!-- /.col-lg-6 (nested) -->
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+{% endblock %}
+
+{% block theme %}
+{% endblock %}

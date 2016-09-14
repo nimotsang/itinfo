@@ -1,0 +1,123 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+{% block nav-head %}
+	{{ block.super }}
+{% endblock %}
+{% block nav-top %}
+       {{ block.super }}
+{% endblock %}
+{% block nav-side %}
+	{{ block.super }}
+{% endblock %}
+{% block content %}
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <br />
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            服务器列表
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div style="width:100%;overflow-x:scroll;">
+                        <div class="panel-body" style="width:2600px;height: 500px;>
+                            <div class="dataTable_wrapper">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th width="4%">服务器名称</th>
+											<th width="5%">IP地址</th>
+											<th width="4%">区域</th>
+											<th width="5%">SN</th>
+											<th width="5%">品牌</th>
+											<th width="5%">型号</th>
+											<th width="4%">联系人</th>
+											<th width="5%">联系电话</th>
+											<th width="5%">类型</th>
+											<th width="10%">CPU</th>
+                                            <th width="4%">核数</th>
+                                            <th width="5%">内存</th>
+                                            <th width="8%">磁盘</th>
+                                            <th width="3%">大小</th>
+                                            <th width="5%">购买时间</th>
+                                            <th width="4%">是否在保</th>
+                                            <th width="5%">机柜</th>
+                                            <th width="5%">机房</th>
+                                            <th width="8%">备注</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+									
+{% for server in server_lists %}
+                                        <tr class="odd gradeX">
+                                            <td><a href="/addRecord?action=edit&issue_name={{ server.name }}" name="name">{{server.name}}</a></td>
+                                            <td>{{server.ip}}</td>
+                                            <td>{{server.zone}}</td>
+                                            <td class="center">{{ server.sn }}</td>
+                                            <td class="center">{{server.manufacturer}}</td>
+											<td class="center">{{server.mod}}</td>
+											<td class="center">{{server.contact}}</td>
+											<td class="center">{{server.factory_phone}}</td>
+											<td class="center">{{server.type}}</td>
+											<td class="center">{{server.cpu_freq}}</td>
+                                            <td class="center">{{server.cpu_core}}</td>
+                                            <td class="center">{{server.mem}}</td>
+                                            <td class="center">{{server.disk}}</td>
+                                            <td class="center">{{server.size}}</td>
+                                            <td class="center">{{server.buy_date}}</td>
+                                            <td class="center">
+                                                {% if server.guaranteed == 1 %}
+                                                            <span style="color:green;font-weight:bold">在保</span>
+                                                        {% else %}
+                                                            <span style="color:red;font-weight:bold">过保</span>
+                                                        {% endif %}
+                                            </td>
+                                            <td class="center">{{server.cabinet}}</td>
+                                            <td class="center">{{server.idc}}</td>
+                                            <td class="center">{{server.comment}}</td>
+                                        </tr>
+{% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            </div>
+                        <!-- /.panel-body -->
+                        </div>
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+{% endblock %}
+{% block theme %}
+	<!-- Custom Theme JavaScript -->
+    <script src="{% static 'js/sb-admin-2.js' %}"></script>
+	 <!-- DataTables JavaScript -->
+    <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'js/dataTables.bootstrap.min.js' %}"></script>
+
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+                responsive: true
+        });
+    });
+    </script>
+{% endblock %}
+
+
+
+
+
+
+
