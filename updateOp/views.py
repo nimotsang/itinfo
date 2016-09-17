@@ -21,9 +21,9 @@ def login(request):
         if user is not None and user.is_active:
             auth.login(request, user)
             request.session['username'] = name
-            return HttpResponseRedirect('/updateOp/week_chart')
+            return HttpResponseRedirect('/updateOp/index')
         else:
-            return render_to_response("ok.html", {'result': 'error'})
+            return render_to_response("ok.html", {'result': '用户名或密码错误!'})
     return render_to_response('login.html')
 
 
