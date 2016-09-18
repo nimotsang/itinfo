@@ -10,7 +10,7 @@ from updateOp import views
 urlpatterns = [
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^updateop/', include('updateOp.urls')),
+    url(r'^updateOp/', include('updateOp.urls')),
     url(r'^portmap/', include('portmap.urls')),
     url(r'^appinfo/', include('appinfo.urls')),
     url(r'^ipresource/', include('ipresource.urls')),
