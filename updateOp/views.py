@@ -90,7 +90,7 @@ def week_chart(request):
     res_issue_type = Issue.objects.raw("select id,issue_type,count(issue_type) as dcount from updateop_issue group by issue_type")
 
     # 将数据组装到js文件,发起部门统计图表
-    f = open('updateOp/static/js/morris-data.js', mode='w')
+    f = open('/static/js/morris-data.js', mode='w')
     f.write('$(function() {Morris.Bar({element: \'morris-bar-chart\',data: [')
     for r in res_1:
         f.write('{y: \''+str(r.dept_name)+'\',a: \''+bytes(r.dept_count)+'\',},')

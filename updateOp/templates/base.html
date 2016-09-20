@@ -1,4 +1,3 @@
-{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,16 +13,16 @@
 {% block head-css %}
 {% endblock %}
     <!-- Bootstrap Core CSS -->
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="{% static 'metisMenu/dist/metisMenu.min.css' %}" rel="stylesheet">
+    <link href="/static/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="{% static 'css/sb-admin-2.css' %}" rel="stylesheet">
+    <link href="/static/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="{% static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -279,7 +278,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="/updateop/index"><i class="fa fa-dashboard fa-fw"></i> 概览</a>
+                            <a href="/updateOp/index"><i class="fa fa-dashboard fa-fw"></i> 概览</a>
                         </li>
                         <li>
                             <a href="/shortcut/shortcut_list"><i class="fa fa-link"></i> 快捷方式</a>
@@ -299,10 +298,10 @@
                             <a href="#"><i class="fa fa-globe"></i> 上线信息<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="/updateop/issue_list">上线列表</a>
+                                    <a href="/updateOp/issue_list">上线列表</a>
                                 </li>
                                 <li>
-                                    <a href="/updateop/week_chart">上线统计</a>
+                                    <a href="/updateOp/week_chart">上线统计</a>
                                 </li>
                             </ul>
                         </li>
@@ -375,16 +374,16 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="/static/js/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="{% static 'metisMenu/dist/metisMenu.min.js' %}"></script>
+    <script src="/static/metisMenu/dist/metisMenu.min.js"></script>
 {% block theme %}
     <!-- Custom Theme JavaScript -->
-    <script src="{% static 'js/sb-admin-2.js' %}"></script>
+    <script src="/static/js/sb-admin-2.js"></script>
 {% endblock %}
 </body>
 

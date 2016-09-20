@@ -15,7 +15,7 @@ SECRET_KEY = 'cu@@w2lo789&(*dss#a5pcw^psv!-8-5x8-#i%rp0_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -77,7 +77,7 @@ DATABASES = dict(default={
     'ENGINE': 'django.db.backends.mysql',
     'NAME': 'itinfo',
     'USER': 'root',
-    'PASSWORD': '1ab8217a3c3fdeb387e1',
+    'PASSWORD': '12345678',
     'HOST': '',
     'PORT': '',
     'OPTIONS': {
@@ -112,7 +112,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'debug.log',
+            'filename': '/tmp/itinfo_debug.log',
         },
     },
     'loggers': {
@@ -137,16 +137,20 @@ USE_L10N = True
 USE_TZ = True
 
 
-HERE = os.path.dirname(os.path.dirname(__file__))
+#HERE = os.path.dirname(os.path.dirname(__file__))
 # 存放上传文件的目录
-MEDIA_ROOT = os.path.join(HERE, './uploads/').replace('\\', '/')
+#MEDIA_ROOT = os.path.join(HERE, './uploads/').replace('\\', '/')
+#MEDIA_ROOT = "/home/docker/persistent"
 # 访问上传文件目录的uri路径
-MEDIA_URL = "/uploads/"
+#MEDIA_URL = "/uploads/"
 # 静态文件存放目录
-STATIC_ROOT = os.path.join(HERE, './static/').replace('\\', '/')
+#STATIC_ROOT = os.path.join(HERE, './static/').replace('\\', '/')
+STATIC_ROOT ="/home/docker/code/itinfo/static"
 # 静态文件访问路径
-STATIC_URL = "/static/"
-STATICFILES_DIRS = (os.path.join(HERE, './updateOp/static/').replace('\\', '/'),)
+STATIC_URL = '/static/' 
+# 模版中使用的静态文件指向路径
+#STATICFILES_DIRS = (os.path.join(HERE, './static/').replace('\\', '/'),)
+#STATICFILES_DIRS = "/home/docker/code/itinfo/static"
 
 # {% load staticfiles %}
 # <img src="{% static "my_app/myexample.jpg" %}" alt="My image"/>
