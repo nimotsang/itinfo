@@ -1,10 +1,9 @@
 # -*- coding:utf-8 -*-
 
-import os
+import os, platform
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -16,7 +15,6 @@ SECRET_KEY = 'cu@@w2lo789&(*dss#a5pcw^psv!-8-5x8-#i%rp0_'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -69,7 +67,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'cnepay_project.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
@@ -77,14 +74,13 @@ DATABASES = dict(default={
     'ENGINE': 'django.db.backends.mysql',
     'NAME': 'itinfo',
     'USER': 'root',
-    'PASSWORD': '12345678',
+    'PASSWORD': '',
     'HOST': '',
     'PORT': '',
     'OPTIONS': {
         'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
     }
 })
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -104,25 +100,83 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# 添加日志功能
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': '/tmp/itinfo_debug.log',
+def UsePlatform():
+  sysstr = platform.system()
+  if(sysstr =="Windows"):
+    print ("Call Windows tasks")
+  elif(sysstr == "Linux"):
+    print ("Call Linux tasks")
+  else:
+    print ("Other System tasks")
+
+if platform.system() == "Windows":
+    # 添加日志功能
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'file': {
+                'level': 'DEBUG',
+                'class': 'logging.FileHandler',
+                'filename': 'd:/itinfo_debug.log',
+            },
         },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-            'propagate': True,
+        'loggers': {
+            'django': {
+                'handlers': ['file'],
+                'level': 'DEBUG',
+                'propagate': True,
+            },
         },
-    },
-}
+    }
+
+    # windows下配置
+    HERE = os.path.dirname(os.path.dirname(__file__))
+    # 存放上传文件的目录
+    MEDIA_ROOT = os.path.join(HERE, './uploads/').replace('\\', '/')
+    # 访问上传文件目录的uri路径
+    MEDIA_URL = "/uploads/"
+    # 静态文件存放目录
+    STATIC_ROOT = os.path.join(HERE, './static/').replace('\\', '/')
+    # 静态文件访问路径
+    STATIC_URL = '/static/'
+    # 模版中使用的静态文件指向路径
+    STATICFILES_DIRS = (os.path.join(HERE, './static/').replace('\\', '/'),)
+    # 调用方式举例
+    # {% load staticfiles %}
+    # <img src="{% static "my_app/myexample.jpg" %}" alt="My image"/>
+
+elif platform.system() == "Linux":
+    # 添加日志功能
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'file': {
+                'level': 'DEBUG',
+                'class': 'logging.FileHandler',
+                'filename': '/var/log/itinfo_debug.log',
+            },
+        },
+        'loggers': {
+            'django': {
+                'handlers': ['file'],
+                'level': 'DEBUG',
+                'propagate': True,
+            },
+        },
+    }
+
+    # linux 下的配置
+    MEDIA_ROOT = "/home/docker/persistent"
+    # 访问上传文件目录的uri路径
+    MEDIA_URL = "/uploads/"
+    # Linux 环境配置
+    STATIC_ROOT = "/home/docker/code/itinfo/static"
+    # 静态文件访问路径
+    STATIC_URL = '/static/'
+    # 模版中使用的静态文件指向路径 nginx下配置/static alias到一个路径后,模板中可以直接使用/static/...
+    STATICFILES_DIRS = "/home/docker/code/itinfo/static"
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
@@ -137,23 +191,11 @@ USE_L10N = True
 USE_TZ = True
 
 
-#HERE = os.path.dirname(os.path.dirname(__file__))
-# 存放上传文件的目录
-#MEDIA_ROOT = os.path.join(HERE, './uploads/').replace('\\', '/')
-#MEDIA_ROOT = "/home/docker/persistent"
-# 访问上传文件目录的uri路径
-#MEDIA_URL = "/uploads/"
-# 静态文件存放目录
-#STATIC_ROOT = os.path.join(HERE, './static/').replace('\\', '/')
-STATIC_ROOT ="/home/docker/code/itinfo/static"
-# 静态文件访问路径
-STATIC_URL = '/static/' 
-# 模版中使用的静态文件指向路径
-#STATICFILES_DIRS = (os.path.join(HERE, './static/').replace('\\', '/'),)
-#STATICFILES_DIRS = "/home/docker/code/itinfo/static"
 
-# {% load staticfiles %}
-# <img src="{% static "my_app/myexample.jpg" %}" alt="My image"/>
+
+
+
+
 
 ADMIN_MEDIA_PREFIX = STATIC_URL + "grappelli/"
 

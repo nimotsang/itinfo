@@ -2,5 +2,5 @@
 *.log
 *.sql
 cnepay_project/wsgi.py
-cnepay_project/settings.py
+#cnepay_project/settings.py
 migrations
