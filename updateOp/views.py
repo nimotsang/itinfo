@@ -4,46 +4,17 @@ import sys
 reload(sys)
 sys.setdefaultencoding("utf-8")
 from django.shortcuts import render_to_response
-from django.contrib import auth
 from .models import Issue, Persons, Prod
 from django.http.response import HttpResponseRedirect
 import datetime
 from django.utils.timezone import now, timedelta
-# from django.db.models import Count
 
 
-def login(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        password = request.POST.get('password')
-        print(password)
-        user = auth.authenticate(username=name, password=password)
-        print(user)
-        if user is not None and user.is_active:
-            auth.login(request, user)
-            request.session['username'] = name
-            return HttpResponseRedirect('/updateOp/index')
-        else:
-            return render_to_response("ok.html", {'result': '用户名或密码错误!'})
-    return render_to_response('login.html')
-
-
-def auth_logout(request):
-    auth.logout(request)
-    return HttpResponseRedirect('/updateOp/login')
-
-
-def index(request):
-    username = request.session.get('username')
-    if username is None:
-        return HttpResponseRedirect('/updateOp/login')
-
-    return render_to_response('index.html', locals())
-
-
-# {y: '2006',a: 100,b: 90},
 def week_chart(request):
+    return render_to_response('updateop/chat.html', locals())
 
+
+def test(request):
     # 获取当前时间是星期几
     date = now().strftime("%w")
     # 按照数字获取星期一的天数
@@ -111,49 +82,22 @@ def week_chart(request):
 
     f.close()
 
-    return render_to_response('chat.html', locals())
-
-
-def test(request):
-    try:
-        data = xlrd.open_workbook('test.xls')
-        # print(data)
-    except Exception, e:
-        print str(e)
-
-    table = data.sheets()[0]
-
-    nrows = table.nrows  # 行数
-    # ncols = table.ncols  # 列数
-
-    print(table.row_values(0))
-    if not nrows:
-        pass
-    else:
-        for rownum in range(1, nrows):
-            row = table.row_values(rownum)
-            if row:
-                rows = {}
-                for i in range(len(row)):
-                    rows[rownum][i] = row[i]
-    print(rows)
-
-    return render_to_response("test.html", {})
+    return render_to_response('updateop/chat.html', locals())
 
 
 def issue_list(request):
     username = request.session.get('username')
     if username is None:
-        return HttpResponseRedirect('/updateOp/login')
+        return HttpResponseRedirect('/login')
     content_list = Issue.objects.all()
-    return render_to_response("issue_list.html", locals())
+    return render_to_response("updateop/issue_list.html", locals())
 
 
 def addRecord(request):
     # 判断是否登录
     username = request.session.get('username')
     if username is None:
-        return HttpResponseRedirect('/updateOp/login')
+        return HttpResponseRedirect('/login')
 
     operators = Persons.objects.all().filter(dept_id=1)
     products = Prod.objects.all()
@@ -218,4 +162,4 @@ def addRecord(request):
         if issue_name and prod:
                 Issue.objects.filter(issue_name=issue_name).update(prod=prod,content=content, issue_type=issue_type, req_from=req_from,report_to=report_to, operator=operator)
 
-    return render_to_response('add.html', locals())
+    return render_to_response('updateop/add.html', locals())

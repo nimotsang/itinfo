@@ -74,9 +74,9 @@ DATABASES = dict(default={
     'ENGINE': 'django.db.backends.mysql',
     'NAME': 'itinfo',
     'USER': 'root',
-    'PASSWORD': '',
-    'HOST': '',
-    'PORT': '',
+    'PASSWORD': '12345678',
+    'HOST': '127.0.0.1',
+    'PORT': '3306',
     'OPTIONS': {
         'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
     }
@@ -100,14 +100,21 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-def UsePlatform():
-  sysstr = platform.system()
-  if(sysstr =="Windows"):
-    print ("Call Windows tasks")
-  elif(sysstr == "Linux"):
-    print ("Call Linux tasks")
-  else:
-    print ("Other System tasks")
+HERE = os.path.dirname(os.path.dirname(__file__))
+# 存放上传文件的目录
+MEDIA_ROOT = os.path.join(HERE, './uploads/').replace('\\', '/')
+# 访问上传文件目录的uri路径
+MEDIA_URL = "/uploads/"
+# 执行命令python manage.py collectstatic 之后静态文件将要复制到的目录，这个目录只有在运行collectstatic时候才会用到
+STATIC_ROOT = os.path.join(HERE, './static/grappelli').replace('\\', '/')
+# 静态文件访问路径
+STATIC_URL = '/static/'
+# 模版中使用的静态文件指向路径
+STATICFILES_DIRS = (os.path.join(HERE, './static/').replace('\\', '/'),)
+# 调用方式举例
+# {% load staticfiles %}
+# <img src="{% static "my_app/myexample.jpg" %}" alt="My image"/>
+
 
 if platform.system() == "Windows":
     # 添加日志功能
@@ -130,22 +137,6 @@ if platform.system() == "Windows":
         },
     }
 
-    # windows下配置
-    HERE = os.path.dirname(os.path.dirname(__file__))
-    # 存放上传文件的目录
-    MEDIA_ROOT = os.path.join(HERE, './uploads/').replace('\\', '/')
-    # 访问上传文件目录的uri路径
-    MEDIA_URL = "/uploads/"
-    # 静态文件存放目录
-    STATIC_ROOT = os.path.join(HERE, './static/').replace('\\', '/')
-    # 静态文件访问路径
-    STATIC_URL = '/static/'
-    # 模版中使用的静态文件指向路径
-    STATICFILES_DIRS = (os.path.join(HERE, './static/').replace('\\', '/'),)
-    # 调用方式举例
-    # {% load staticfiles %}
-    # <img src="{% static "my_app/myexample.jpg" %}" alt="My image"/>
-
 elif platform.system() == "Linux":
     # 添加日志功能
     LOGGING = {
@@ -155,7 +146,7 @@ elif platform.system() == "Linux":
             'file': {
                 'level': 'DEBUG',
                 'class': 'logging.FileHandler',
-                'filename': '/var/log/itinfo_debug.log',
+                'filename': '/tmp/itinfo_debug.log',
             },
         },
         'loggers': {
@@ -167,16 +158,6 @@ elif platform.system() == "Linux":
         },
     }
 
-    # linux 下的配置
-    MEDIA_ROOT = "/home/docker/persistent"
-    # 访问上传文件目录的uri路径
-    MEDIA_URL = "/uploads/"
-    # Linux 环境配置
-    STATIC_ROOT = "/home/docker/code/itinfo/static"
-    # 静态文件访问路径
-    STATIC_URL = '/static/'
-    # 模版中使用的静态文件指向路径 nginx下配置/static alias到一个路径后,模板中可以直接使用/static/...
-    STATICFILES_DIRS = "/home/docker/code/itinfo/static"
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
@@ -189,13 +170,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-
-
-
-
-
-
 
 ADMIN_MEDIA_PREFIX = STATIC_URL + "grappelli/"
 

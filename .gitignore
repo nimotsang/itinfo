@@ -4,3 +4,4 @@
 cnepay_project/wsgi.py
 #cnepay_project/settings.py
 migrations
+.idea
