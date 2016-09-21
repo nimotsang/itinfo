@@ -30,22 +30,24 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
-                                            <th width="10%">ID</th>
-											<th width="5%">服务器IP</th>
-											<th width="5%">服务器名称</th>
-											<th width="10%">服务器描述</th>
-											<th width="10%">备注</th>
+                                            <th width="5%">序号</th>
+											<th width="15%">公司名称</th>
+											<th width="10%">公司电话</th>
+											<th width="20%">公司主页</th>
+                                            <th width="25%">公司地址</th>
+											<th width="25%">备注信息</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 									
-{% for lan in lan_list %}
+{% for company in company_lists %}
                                         <tr class="odd gradeX">
-                                            <td><a href="/addRecord?action=edit&issue_name={{ lan.id }}" name="name">{{lan.id}}</a></td>
-                                            <td>{{lan.l_ip}}</td>
-                                            <td>{{lan.l_name}}</td>
-                                            <td class="center">{{ lan.detail}}</td>
-                                            <td class="center">{{lan.comment}}</td>
+                                            <td><a href="/addRecord?action=edit&issue_name={{ company.id }}" name="name">{{company.id}}</a></td>
+                                            <td>{{company.name}}</td>
+                                            <td>{{company.tel}}</td>
+                                            <td class="center">{{ company.website}}</td>
+                                            <td class="center">{{company.address}}</td>
+                                            <td class="center">{{company.comments}}</td>
                                         </tr>
 {% endfor %}
                                     </tbody>
