@@ -25,12 +25,11 @@ class Company(models.Model):
 
 class Persons(models.Model):
     name = models.CharField(max_length=50, verbose_name='姓名')
-    sex = models.NullBooleanField(null=True, blank=True, verbose_name='性别')
+    sex = models.NullBooleanField(null=True, blank=True, choices=((True, '男'), (False, '女'), (None, '未知')), verbose_name='性别')
     dept = models.CharField(max_length=50, null=True, blank=True, verbose_name='部门')
     company = models.ForeignKey(Company, null=True, blank=True, verbose_name='公司')
     contact = models.CharField(max_length=150, null=True, blank=True, verbose_name='联系方式')
     comment = models.TextField(null=True, blank=True, verbose_name='备注')
-	
 
     class Meta:
         ordering = ["name"]

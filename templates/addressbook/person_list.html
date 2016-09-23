@@ -45,7 +45,13 @@
                                         <tr class="odd gradeX">
                                             <td><a href="/addRecord?action=edit&issue_name={{ person.id }}" name="name">{{person.id}}</a></td>
                                             <td>{{person.name}}</td>
-                                            <td>{{person.sex}}</td>
+                                            <td>{% if person.sex == True %}
+                                                男
+                                                {% elif person.sex == False %}
+                                                女
+                                                {% else %}
+                                                未知
+                                            {% endif %}</td>
                                             <td class="center">{{ person.dept}}</td>
                                             <td class="center">{{person.company}}</td>
                                             <td class="center">{{person.contact}}</td>
