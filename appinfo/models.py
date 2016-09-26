@@ -21,7 +21,7 @@ class Server(models.Model):
     buy_date = models.DateField(blank=True, null=True, verbose_name='购买时间')
     contact = models.CharField(max_length=25, blank=True, null=True, verbose_name='联系人')
     factory_phone = models.CharField(max_length=25, blank=True, null=True, verbose_name='联系电话')
-    guaranteed = models.SmallIntegerField(blank=True, null=True, verbose_name='是否在保')
+    guaranteed = models.BooleanField( verbose_name='是否在保')
     cabinet = models.CharField(max_length=20, blank=True, null=True, verbose_name='机柜号')
     idc = models.CharField(max_length=20, blank=True, null=True, verbose_name='机房')
     comment = models.TextField(blank=True, null=True, verbose_name='备注')

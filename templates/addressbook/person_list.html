@@ -43,7 +43,7 @@
 									
 {% for person in person_lists %}
                                         <tr class="odd gradeX">
-                                            <td><a href="/addRecord?action=edit&issue_name={{ person.id }}" name="name">{{person.id}}</a></td>
+                                            <td>{{person.id}}</td>
                                             <td>{{person.name}}</td>
                                             <td>{% if person.sex == True %}
                                                 男
