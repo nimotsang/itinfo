@@ -12,6 +12,15 @@ class ServerAdmin(admin.ModelAdmin):
         'size',
         'buy_date', 'contact', 'factory_phone', 'guaranteed', 'cabinet', 'idc', 'comment']
 
+    class Media:
+        # 在管理后台的HTML文件中加入js文件, 每一个路径都会追加STATIC_URL/
+        def __init__(self):
+            pass
+
+        js = (
+            'js/My97DatePicker/WdatePicker.js',
+        )
+
 
 @admin.register(Deploy)
 class DeployAdmin(admin.ModelAdmin):

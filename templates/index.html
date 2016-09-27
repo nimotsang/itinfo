@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block head-css %}
-    <link href="/static/js/morrisjs/morris.css" rel="stylesheet">
+    {{ block.super }}
 {% endblock %}
 {% block nav-head %}
     {{ block.super }}
@@ -13,7 +13,7 @@
 {% endblock %}
 {% block content %}
         <div id="page-wrapper">
-            <h1>欢迎使用!</h1>
+            <div><h1>欢迎使用!</h1></div>
         </div>
 {% endblock %}
 {% block theme %}
