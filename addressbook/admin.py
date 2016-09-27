@@ -24,5 +24,5 @@ class PersonsAdmin(admin.ModelAdmin):
     agenda.short_description = "性别"
     agenda.allow_tags = True
 
-    fields = ['name', 'sex', 'dept', 'contact', 'comment']
-    list_display = ['name', 'agenda', 'dept', 'contact', 'comment']
+    fields = ['name', 'sex', 'dept', 'contact', 'company', 'comment']
+    list_display = ['name', 'agenda', 'dept', 'contact','company', 'comment']
