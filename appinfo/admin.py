@@ -1,4 +1,5 @@
 # -*- coding:utf-8 -*-
+
 from django.contrib import admin
 from appinfo.models import Server, Deploy, App, Business
 
@@ -18,7 +19,7 @@ class ServerAdmin(admin.ModelAdmin):
             pass
 
         js = (
-            'js/My97DatePicker/WdatePicker.js',
+            '/static/js/My97DatePicker/WdatePicker.js' ,
         )
 
 
