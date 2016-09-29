@@ -1,4 +1,4 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 {% load staticfiles %}
 {% block nav-head %}
 	{{ block.super }}
@@ -10,10 +10,13 @@
 	{{ block.super }}
 {% endblock %}
 {% block content %}
-        <div id="page-wrapper">
-            快捷方式
-        </div>
-        <!-- /#page-wrapper -->
+    <div id="page-wrapper">
+        {% for shortcut_list in shortcut_lists %}
+            <a href="{{ shortcut_list.website }}" target="_blank" title="{{ shortcut_list.comment }}">{{ shortcut_list.name }}</a>
+        {% endfor %}
+
+    </div>
+    <!-- /#page-wrapper -->
 {% endblock %}
 {% block theme %}
 	<!-- Custom Theme JavaScript -->

@@ -1,34 +1,23 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from portmap.models import PortmapWanIp, PortmapLanIp, PortmapMaps
+from portmap.models import WanIp, LanIp, Maps, Agent
 
 
-@admin.register(PortmapWanIp)
-class PortmapWanIpAdmin(admin.ModelAdmin):
-    list_display = ('id', 'w_ip', 'firewall', 'f_location', 'comment')
+@admin.register(WanIp)
+class WanIpAdmin(admin.ModelAdmin):
+    list_display = ('id', 'w_ip','description' )
 
 
-@admin.register(PortmapLanIp)
-class PortmapWanIpAdmin(admin.ModelAdmin):
-    list_display = ('id', 'l_ip', 'l_name', 'detail', 'comment')
+@admin.register(LanIp)
+class LanIpAdmin(admin.ModelAdmin):
+    list_display = ('id', 'l_ip','description')
 
 
-@admin.register(PortmapMaps)
-class PortmapWanIpAdmin(admin.ModelAdmin):
+@admin.register(Maps)
+class MapsAdmin(admin.ModelAdmin):
+    list_display = ('id', 'w_ip', 'w_port', 'l_ip', 'l_port', 'description')
 
-    def w_any(self, obj):
-        if obj.w_port == 0:
-            return "%s" % "any"
-        else:
-            return obj.w_port
-    w_any.short_description = '外部端口'
 
-    def l_any(self, obj):
-        if obj.l_port == 0:
-            return "%s" % "any"
-        else:
-            return obj.l_port
-
-    l_any.short_description = '内部端口'
-
-    list_display = ('id', 'w_ip', 'w_any', 'l_ip', 'l_any', 'comment')
+@admin.register(Agent)
+class AgentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'agent_ip', 'agent_port', 'app_ip', 'app_port', 'description')
